@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+
+  mysqldb:
+    container_name: mysqldb
+    image: mysql:latest
+    volumes:
+      - ./db:/var/lib/mysql  # Assurez-vous de créer ce dossier
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_DATABASE: portail_db  # Nom de la base de données
+      MYSQL_ROOT_PASSWORD: root  # Mot de passe root
+      MYSQL_USER: user  # Utilisateur
+      MYSQL_PASSWORD: password  # Mot de passe pour l'utilisateur
+
+  springboot-app:
+    build: .  # Assurez-vous que le Dockerfile est présent dans le même répertoire
+    ports:
+      - "8089:8080"  # Assurez-vous que l'application écoute sur le port 8080
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/portail_db  # URL de connexion à la base de données
+      SPRING_DATASOURCE_USERNAME: user  # Utilisateur de la base de données
+      SPRING_DATASOURCE_PASSWORD: password  # Mot de passe de l'utilisateur
+    depends_on:
+      - mysqldb
