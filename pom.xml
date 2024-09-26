@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>eya.gestiondesstock</groupId>
 	<artifactId>portail</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1-RELEASE</version>
 	<name>portail</name>
 	<description>ce projet est dans le cadre de mini</description>
 	<properties>
