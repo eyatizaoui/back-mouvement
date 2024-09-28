@@ -1,5 +1,6 @@
 # Utiliser une image OpenJDK
-FROM openjdk:17-alpine
+FROM eclipse-temurin:17-jdk-alpine
+
 
 # Copier le fichier .jar généré par Maven dans le conteneur
 COPY target/portail-*.jar /portail.jar

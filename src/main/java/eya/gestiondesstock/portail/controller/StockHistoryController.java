@@ -41,26 +41,8 @@ public class StockHistoryController {
         return stockHistoryRepository.save(stockHistory);
     }
 
-    @GetMapping("push/{stockHisID}/{nb}")
-    public ResponseEntity<?> pushStock(@PathVariable Long stockHisID ,@PathVariable int nb ){
-        StockHistory stockHistory = stockHistoryRepository.findById(stockHisID).orElse(null);
-        stockHistory.setPut(nb);
-        stockHistory.setAddedBy(stockHistory.getPullBy());
-        stockHistoryRepository.save(stockHistory);
 
-        List<Emplacement> emplacement = emplacementRepository.findByStockIdAndEmpEnum(stockHistory.getStock().getId() , EmpEnum.SE);
-        Emplacement emplacement1 = emplacement.get(0);
-        emplacement1.setQuantity(emplacement1.getQuantity() - nb);
-        emplacementRepository.save(emplacement1);
-        //VqtD884WcsLd
-        //iLkD29VkekFK
-        List<Emplacement> emplacement3 = emplacementRepository.findByStockIdAndEmpEnum(stockHistory.getStock().getId() , EmpEnum.SE);
-        Emplacement emplacement2 = emplacement3.get(0);
-        emplacement2.setQuantity(emplacement2.getQuantity() + nb);
-        emplacementRepository.save(emplacement2);
-        return ResponseEntity.ok(stockHistory);
 
-    }
 
     @PostMapping("pull")
     public ResponseEntity<?> pullStock(@RequestBody List<StockHistoryPullDTO> stockHistoryPullDTOList) {
