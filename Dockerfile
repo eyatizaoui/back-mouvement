@@ -1,5 +1,5 @@
 # Utiliser une image OpenJDK
-FROM eclipse-temurin:17-jdk-alpine
+FROM openjdk:17-jdk-slim-buster
 
 
 # Copier le fichier .jar généré par Maven dans le conteneur
