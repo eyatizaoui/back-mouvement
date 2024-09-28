@@ -1,11 +1,9 @@
-FROM maven:3.8.6-openjdk-17 AS build
-WORKDIR /app
-COPY pom.xml .
-COPY src ./src
-RUN mvn clean package -DskipTests
-
+# Utiliser une image OpenJDK
 FROM openjdk:17-jdk
-WORKDIR /app
-COPY --from=build /app/target/portail-*.jar /portail.jar
+# Copier le fichier .jar généré par Maven dans le conteneur
+COPY target/portail-*.jar /portail.jar
+# Exposer le port sur lequel l'application Spring Boot écoute
 EXPOSE 8080
+
+# Commande pour exécuter l'application
 CMD ["java", "-jar", "/portail.jar"]
