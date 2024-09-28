@@ -1,7 +1,5 @@
 # Utiliser une image OpenJDK
-FROM openjdk:17-jdk-slim-buster
-
-
+FROM openjdk:17-jdk
 # Copier le fichier .jar généré par Maven dans le conteneur
 COPY target/portail-*.jar /portail.jar
 # Exposer le port sur lequel l'application Spring Boot écoute
